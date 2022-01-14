@@ -1,13 +1,25 @@
 var header = document.querySelector("header .container");
 
-console.log(header);
+var menuBtn = document.querySelector("header .menu-btn");
+
 
 window.onscroll = () => headerHandler();
 function headerHandler() {
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        header.style.padding = "0";
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        header.classList.add("active");
     }
     else {
-        header.style.padding = "20px 0";
+        header.classList.remove("active");
+
     }
 }
+menuBtn.addEventListener("click", () => {
+    menuBtn.classList.toggle("active");
+    let menuBtnChild = document.querySelectorAll("header .container ul a");
+
+    menuBtnChild.forEach((child) => {
+        child.onclick = () => {
+            menuBtn.classList.toggle("active");
+        }
+    });
+})
