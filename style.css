@@ -42,17 +42,60 @@ header {
   width: 100%;
   background-color: #fff;
   z-index: 999999;
+  padding: 0 10px;
+}
+.menu-btn {
+  position: relative;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
 }
 
+.menu-btn::after {
+  content: "";
+  position: absolute;
+  width: 90%;
+  height: 4px;
+  transition: all 0.3s linear;
+  background-color: #000;
+  transform: translateY(-5px) rotate(0);
+}
+.menu-btn::before {
+  content: "";
+  position: absolute;
+  width: 90%;
+  height: 4px;
+  transition: all 0.3s linear;
+  background-color: #000;
+  transform: translateY(5px) rotate(0);
+}
+.menu-btn.active::after {
+  background-color: #fff;
+  transform: translateY(0px) rotate(45deg);
+}
+.menu-btn.active::before {
+  background-color: #fff;
+  transform: translateY(0px) rotate(-45deg);
+}
 header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
 }
+header .container.active {
+  padding: 0;
+}
 .logo img {
   max-width: 40px;
 }
+.menu,
 .user,
 .menu ul {
   display: flex;
@@ -62,6 +105,9 @@ header .container {
 
 .menu ul li {
   list-style: none;
+}
+.menu ul li:hover a {
+  color: var(--primary-color);
 }
 
 .menu ul li a {
@@ -102,7 +148,6 @@ header .container {
   background: url(./images/intro.jpg);
   background-position: center center;
   background-size: cover;
-  padding: 120px 0;
   text-align: center;
   position: relative;
 }
@@ -123,6 +168,7 @@ header .container {
   z-index: 10;
   width: 430px;
   margin: 0 auto;
+  padding: 10px;
 }
 
 .banner-content h2 {
@@ -189,6 +235,7 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   margin-top: 50px;
 }
 .about-item .avatar {
@@ -198,7 +245,7 @@ header .container {
   position: relative;
 }
 .about-item {
-  width: 350px;
+  width: 30%;
   height: 280px;
   text-align: center;
   border-radius: 10px;
@@ -339,12 +386,14 @@ header .container {
 .class {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   gap: 20px;
   text-align: center;
   margin-top: 40px;
 }
 .class-card {
+  width: 23%;
   border: 1px solid #ccc;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   padding: 40px 20px;
@@ -485,8 +534,9 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 50px;
-  gap: 20px;
+  gap: 20px 0;
 }
 .post {
   width: 24%;
@@ -712,4 +762,120 @@ footer .col li:hover {
 }
 .sendEmail button:hover {
   opacity: 0.7;
+}
+
+/* --------------responsive-------------- */
+
+@media screen and (max-width: 1111px) {
+  .container {
+    padding: 40px;
+  }
+  section > .title + p {
+    padding: 20px;
+  }
+  #banner .banner-content {
+    width: auto;
+    padding: 40px;
+  }
+  header .container {
+    padding: 0;
+  }
+  #banner {
+    margin-top: 40px;
+  }
+  #banner::after {
+    width: 100%;
+    clip-path: none;
+    left: 0;
+    transform: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+  .menu a {
+    font-size: 0.7em;
+  }
+  header .container .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #011c3a;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  header .container .menu-btn.active ~ .menu {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .card-content,
+  .events,
+  header .container .menu ul {
+    flex-direction: column;
+  }
+  .card-content::after {
+    display: none;
+  }
+  #event .intro {
+    padding: 40px 0;
+  }
+  .event-item,
+  .class-card,
+  .post {
+    width: 48%;
+  }
+  .events .event-content {
+    width: auto;
+  }
+  .events img {
+    max-width: 100% !important;
+  }
+  .col {
+    width: auto !important;
+  }
+  .slide-item {
+    padding: 0px;
+    margin: 0 40px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+  #banner .banner-content {
+    padding: 20px;
+  }
+  #event .intro h2,
+  section > .title {
+    font-size: 2em;
+  }
+  .about-item,
+  .event-item,
+  .class-card,
+  .post {
+    width: 80%;
+  }
+  .event-list,
+  .event-item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .posts,
+  .class,
+  .about-content {
+    flex-direction: column;
+  }
+  .card-content::after {
+    display: none;
+  }
 }
