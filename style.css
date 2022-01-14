@@ -796,6 +796,9 @@ footer .col li:hover {
   .menu a {
     font-size: 0.7em;
   }
+ .menu li a {
+    color: #fff !important;
+  }
   header .container .menu {
     display: flex;
     align-items: center;
